@@ -1,3 +1,4 @@
+import { PositiveIntPipe } from './../common/pipes/positiveint.pipe';
 import {
   Controller,
   Delete,
@@ -7,6 +8,8 @@ import {
   Put,
   HttpException,
   UseFilters,
+  Param,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/http-exception.filter';
 import { CatsService } from './cats.service';
@@ -22,8 +25,8 @@ export class CatsController {
   }
 
   @Get(':id')
-  getOneCat() {
-    throw new HttpException('주인 아님!', 403);
+  getOneCat(@Param('id', ParseIntPipe, PositiveIntPipe) param: number) {
+    // 원래 param의 type은 string으로 나온다.
     return 'one cat';
   }
 
