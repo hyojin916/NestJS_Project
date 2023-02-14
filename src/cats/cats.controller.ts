@@ -10,18 +10,23 @@ import {
   UseFilters,
   Param,
   ParseIntPipe,
+  UseInterceptors,
 } from '@nestjs/common';
-import { HttpExceptionFilter } from 'src/http-exception.filter';
+import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { CatsService } from './cats.service';
+import { SuccessInterceptor } from 'src/common/interceptors/success.interceptot';
 
 @Controller('cats')
+@UseInterceptors(SuccessInterceptor)
 @UseFilters(HttpExceptionFilter)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Get()
   getAllCat() {
-    throw new HttpException('api 부서져떠!', 401);
+    console.log('hello controller');
+    // throw new HttpException('api 부서져떠!', 401);
+    return { cats: 'all cats' };
   }
 
   @Get(':id')
