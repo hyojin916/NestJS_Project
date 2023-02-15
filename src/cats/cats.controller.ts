@@ -20,33 +20,27 @@ export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Get()
-  getAllCat() {
-    throw new HttpException('api 부서져떠!', 401);
-  }
-
-  @Get(':id')
-  getOneCat(@Param('id', ParseIntPipe, PositiveIntPipe) param: number) {
-    // 원래 param의 type은 string으로 나온다.
-    return 'one cat';
+  getCurrentCat() {
+    return 'current cat';
   }
 
   @Post()
-  createCat() {
-    return 'create cat';
+  async signUp() {
+    return 'signUp';
   }
 
-  @Put(':id')
-  updateCat() {
-    return;
+  @Post()
+  async logIn() {
+    return 'login';
   }
 
-  @Patch(':id')
-  updatePartialCat() {
-    return;
+  @Post()
+  async logOut() {
+    return 'logout';
   }
 
-  @Delete(':id')
-  deleteCat() {
-    return 'delete cat';
+  @Post()
+  async 'upload/cats'() {
+    return 'uploadImg';
   }
 }
