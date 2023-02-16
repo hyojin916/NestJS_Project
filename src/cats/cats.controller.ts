@@ -10,9 +10,11 @@ import {
   UseFilters,
   Param,
   ParseIntPipe,
+  Body,
 } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/http-exception.filter';
 import { CatsService } from './cats.service';
+import { CatRequestDto } from './dto/cats.request.dto';
 
 @Controller('cats')
 @UseFilters(HttpExceptionFilter)
@@ -25,7 +27,8 @@ export class CatsController {
   }
 
   @Post()
-  async signUp() {
+  async signUp(@Body() body: CatRequestDto) {
+    console.log(body);
     return 'signUp';
   }
 
