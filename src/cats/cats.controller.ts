@@ -1,20 +1,17 @@
-import { PositiveIntPipe } from './../common/pipes/positiveint.pipe';
 import {
   Controller,
-  Delete,
   Get,
-  Patch,
   Post,
-  Put,
-  HttpException,
   UseFilters,
+  Body,
+  UseInterceptors,
   Param,
   ParseIntPipe,
-  UseInterceptors,
 } from '@nestjs/common';
-import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
+import { SuccessInterceptor } from 'src/common/interceptors/success.intercepter';
 import { CatsService } from './cats.service';
-import { SuccessInterceptor } from 'src/common/interceptors/success.interceptot';
+import { CatRequestDto } from './dto/cats.request.dto';
+import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 
 @Controller('cats')
 @UseInterceptors(SuccessInterceptor)
@@ -23,10 +20,8 @@ export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Get()
-  getAllCat() {
-    console.log('hello controller');
-    // throw new HttpException('api 부서져떠!', 401);
-    return { cats: 'all cats' };
+  getCurrentCat() {
+    return 'current cat';
   }
 
   @Get(':id')
@@ -36,22 +31,23 @@ export class CatsController {
   }
 
   @Post()
-  createCat() {
-    return 'create cat';
+  async signUp(@Body() body: CatRequestDto) {
+    console.log(body);
+    return await this.catsService.signup(body);
   }
 
-  @Put(':id')
-  updateCat() {
-    return;
+  @Post()
+  async logIn() {
+    return 'login';
   }
 
-  @Patch(':id')
-  updatePartialCat() {
-    return;
+  @Post()
+  async logOut() {
+    return 'logout';
   }
 
-  @Delete(':id')
-  deleteCat() {
-    return 'delete cat';
+  @Post()
+  async 'upload/cats'() {
+    return 'uploadImg';
   }
 }
