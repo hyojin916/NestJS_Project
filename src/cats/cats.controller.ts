@@ -12,6 +12,7 @@ import { SuccessInterceptor } from 'src/common/interceptors/success.intercepter'
 import { CatsService } from './cats.service';
 import { CatRequestDto } from './dto/cats.request.dto';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
+import { PositiveIntPipe } from 'src/common/pipes/positiveint.pipe';
 
 @Controller('cats')
 @UseInterceptors(SuccessInterceptor)
