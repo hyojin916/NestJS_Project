@@ -8,7 +8,7 @@ import {
   Param,
   ParseIntPipe,
 } from '@nestjs/common';
-import { SuccessInterceptor } from 'src/common/interceptors/success.intercepter';
+import { SuccessInterceptor } from 'src/common/interceptors/success.interceptot';
 import { CatsService } from './cats.service';
 import { CatRequestDto } from './dto/cats.request.dto';
 import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
