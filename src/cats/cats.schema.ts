@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, SchemaOptions } from 'mongoose';
 import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
 
 const options: SchemaOptions = {
   timestamps: true,
@@ -9,6 +10,11 @@ const options: SchemaOptions = {
 @Schema(options)
 export class Cat extends Document {
   // * mongoose의 document를 상속받았다.
+  @ApiProperty({
+    example: 'gywlsh274@gmail.com',
+    description: 'email',
+    required: true,
+  })
   @Prop({
     required: true,
     unique: true,
@@ -17,6 +23,11 @@ export class Cat extends Document {
   @IsNotEmpty()
   email: string; // * 이건 validation이 아니고 typping ->  class validator
 
+  @ApiProperty({
+    example: '꼬미',
+    description: '고양이 이름',
+    required: true,
+  })
   @Prop({
     required: true,
   })
@@ -24,6 +35,11 @@ export class Cat extends Document {
   @IsNotEmpty()
   name: string;
 
+  @ApiProperty({
+    example: 'catcat1234',
+    description: '비밀번호',
+    required: true,
+  })
   @Prop({
     required: true,
   })
