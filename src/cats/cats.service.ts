@@ -13,7 +13,7 @@ export class CatsService {
     const isCatExist = await this.catModel.exists({ email });
 
     if (isCatExist) {
-      throw new UnauthorizedException('해당 고양이는 이미 존재합니다.');
+      throw new UnauthorizedException('해당 고양이는 이미 존재합니다.'); // * 403
     }
     const saltOrRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltOrRounds);
