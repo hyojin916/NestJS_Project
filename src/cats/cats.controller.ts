@@ -15,12 +15,17 @@ import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter
 import { PositiveIntPipe } from 'src/common/pipes/positiveint.pipe';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ReadOnlyCatDto } from './dto/cat.dto';
+import { AuthService } from './../auth/auth.service';
+import { loginRequestDto } from 'src/auth/dto/login.request.dto';
 
 @Controller('cats')
 @UseInterceptors(SuccessInterceptor)
 @UseFilters(HttpExceptionFilter)
 export class CatsController {
-  constructor(private readonly catsService: CatsService) {}
+  constructor(
+    private readonly catsService: CatsService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Get()
   getCurrentCat() {
@@ -50,9 +55,9 @@ export class CatsController {
   }
 
   @ApiOperation({ summary: '로그인' })
-  @Post('signin')
-  async logIn() {
-    return 'login';
+  @Post('login')
+  async logIn(@Body() body: loginRequestDto) {
+    return await this.authService.jwtLogin(body);
   }
 
   @ApiOperation({ summary: '로그아웃' })
